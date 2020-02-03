@@ -36,7 +36,7 @@ app.get('/', function (req, res) {
 // Implement the movies API endpoint
 
 app.get('/movies', function (req, res) {
-  connection.query("SELECT title,releas,score,reviewer,publication FROM moviereview JOIN reviewer on moviereview .reviewer = reviewer.name",
+  connection.query("SELECT title,`release`,score,reviewer,publication FROM moviereview JOIN reviewer on moviereview .reviewer = reviewer.name",
     function (err, rows) {
       if (err) throw err;
       res.json(rows)
@@ -120,14 +120,24 @@ app.get('/publications', function (req, res) {
 //-----------------------------------------------------------------------------------//-----------------------------------------------------------------------------------//
 
 // Implement the pending reviews API endpoint
+// app.get('/pending', function (req, res) {
+//   var pending = [
+//     { title: 'Superman: Homecoming', release: '2017', score: 10, reviewer: 'Chris Harris', publication: 'International Movie Critic' },
+//     { title: 'Wonder Woman', release: '2017', score: 8, reviewer: 'Martin Thomas', publication: 'TheOne' },
+//     { title: 'Doctor Strange', release: '2016', score: 7, reviewer: 'Anthony Miller', publication: 'ComicBookHero.com' }
+//   ]
+//   res.json(pending);
+// })
+
 app.get('/pending', function (req, res) {
-  var pending = [
-    { title: 'Superman: Homecoming', release: '2017', score: 10, reviewer: 'Chris Harris', publication: 'International Movie Critic' },
-    { title: 'Wonder Woman', release: '2017', score: 8, reviewer: 'Martin Thomas', publication: 'TheOne' },
-    { title: 'Doctor Strange', release: '2016', score: 7, reviewer: 'Anthony Miller', publication: 'ComicBookHero.com' }
-  ]
-  res.json(pending);
+  connection.query("SELECT title,`release`,score,reviewer,publication FROM reviewpending JOIN reviewer on reviewpending .reviewer = reviewer.name",
+    function (err, rows) {
+      if (err) throw err;
+      res.json(rows)
+    });
 })
+
+//-----------------------------------------------------------------------------------//-----------------------------------------------------------------------------------//
 // Launch our API Server and have it listen on port 3000.
 app.listen(3000, () => {
   console.log('Server running on http://localhost:3000')
