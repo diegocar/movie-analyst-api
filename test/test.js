@@ -25,6 +25,7 @@ describe('API', () => {
   });
 
   /**
+  /**
    * Test /movies
    */
   describe('/movies', () => {
@@ -66,4 +67,10 @@ describe('API', () => {
     });
   });
 
+  after(function() {
+    // Se ejecuta después de todas las pruebas del bloque
+    process.exit();
+  });
+
+  
 });
