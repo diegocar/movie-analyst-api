@@ -17,5 +17,13 @@ pipeline {
             }
         }
 
+        stage('Archive Artifact'){
+            steps{
+                sh 'npm pack | tail -n 1'
+                archiveArtifacts artifacts: '**/movie-analyst-api-*.tgz', fingerprint: true
+            }
+        }
+
+
     }
 }
