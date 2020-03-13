@@ -22,9 +22,12 @@ pipeline {
                 sh 'npm pack | tail -n 1'
                 archiveArtifacts artifacts: '**/movie-analyst-api-*.tgz', fingerprint: true
             }
+        }       
+    }
+
+    post {
+        always {
+            junit '**/*.xml'
         }
-
-
-        
     }
 }
