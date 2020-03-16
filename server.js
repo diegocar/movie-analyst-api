@@ -1,9 +1,9 @@
 // Get our dependencies
 var express = require('express');
+var compression = require('compression');
 var app = express();
 
-//const dbConnection = require('../movie-analyst-api/dbConnection');
-//var connection = dbConnection();
+app.use(compression());
 
 var mysql = require('mysql');
 var connection = mysql.createConnection({
@@ -138,8 +138,9 @@ app.get('/pending', function (req, res) {
 })
 
 //-----------------------------------------------------------------------------------//-----------------------------------------------------------------------------------//
+var uport = process.env.PORT || 3000;
+
+console.log("server running on: http://localhost:"+ uport);
 // Launch our API Server and have it listen on port 3000.
-app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000')
-})
+app.listen(uport);
 module.exports = app;
