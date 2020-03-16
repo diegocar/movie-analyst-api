@@ -20,8 +20,8 @@ pipeline {
         stage('Archive Artifact'){
             steps{
                 sh 'npm pack | tail -n 1'
-                archiveArtifacts artifacts: '**/test-results.xml', fingerprint: true
                 archiveArtifacts artifacts: '**/movie-analyst-api-*.tgz', fingerprint: true
+                archiveArtifacts artifacts: '**/test-results.xml', fingerprint: true
             }
         }       
     }
