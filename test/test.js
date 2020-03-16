@@ -10,21 +10,20 @@ chai.use(chaiHttp);
 //Our parent block
 describe('API', () => {
 
-  /*
-    * Test the /GET route
-    */
+/*
+  * Test the /GET route
+  */
   describe('/GET home', () => {
-    it('it should GET any reply', (done) => {
-      chai.request(server)
-        .get('/')
-        .end((err, res) => {
-          res.should.have.status(200);
-          done();
-        });
-    });
+      it('it should GET any reply', (done) => {
+        chai.request(server)
+            .get('/')
+            .end((err, res) => {
+                res.should.have.status(200);
+              done();
+            });
+      });
   });
 
-  /**
   /**
    * Test /movies
    */
@@ -67,10 +66,4 @@ describe('API', () => {
     });
   });
 
-  after(function() {
-    // Se ejecuta después de todas las pruebas del bloque
-    process.exit();
-  });
-
-  
 });
