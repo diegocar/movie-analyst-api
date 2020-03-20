@@ -31,7 +31,18 @@ pipeline {
             steps{
                 sh 'scp -i "DevopsDiegoKey.pem" **/movie-analyst-api-*.tgz ubuntu@3.15.28.24:/home/ubuntu/'
             }
-        }       
+        }
+        def remote = [:]
+        remote.name = 'A Master'
+        remote.host = '3.15.28.24'
+        remote.user = 'ubuntu'
+        remote.allowAnyHosts = true
+	    remote.identityFile = "DevopsDiegoKey.pem"
+	    remote.fileTransfer = "SCP"
+        stage('Remote SSH') {
+            sshCommand remote: remote, command: "ls -lrt"
+            sshCommand remote: remote, command: "scp -i "DevopsDiegoKey.pem" iPhone.txt ubuntu@3.15.28.24:/home/ubuntu/"
+        }
     }
 
     post {
