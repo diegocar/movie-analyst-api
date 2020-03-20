@@ -47,6 +47,6 @@ def remote = [:]
     remote.fileTransfer = "SCP"
     node{
         stage('Remote SSH') {
-            sshCommand remote: remote, command: "ssh -i "DevopsDiegoKey.pem" ubuntu@3.15.28.24 pwd", sudo : true
+            sshCommand remote: remote, sudo: true, command: "ssh -i "DevopsDiegoKey.pem" ubuntu@3.15.28.24 pwd"
         }
     }
