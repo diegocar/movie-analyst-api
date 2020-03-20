@@ -44,7 +44,7 @@ def remote = [:]
     remote.user = 'ubuntu'
     remote.allowAnyHosts = true
     remote.identityFile = "DevopsDiegoKey.pem"
-    remote.fileTransfer = "SCP"
+
     node{
         stage('Remote SSH') {
             sshCommand remote: remote, sudo: true, command: "ssh -i "DevopsDiegoKey.pem" ubuntu@3.15.28.24 pwd"
