@@ -29,7 +29,16 @@ pipeline {
         }
     }
 
-    def remote = [:]
+    
+
+    post {
+        always {
+            junit '**/*.xml'
+        }
+    }
+}
+
+def remote = [:]
     remote.name = 'A Master'
     remote.host = '3.15.28.24'
     remote.user = 'ubuntu'
@@ -42,10 +51,3 @@ pipeline {
             sshCommand remote: remote, command: "scp -i "DevopsDiegoKey.pem" movie-analyst-api-*.tgz ubuntu@3.15.28.24:/home/ubuntu/"
         }
     }
-
-    post {
-        always {
-            junit '**/*.xml'
-        }
-    }
-}
