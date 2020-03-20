@@ -26,6 +26,11 @@ pipeline {
                 archiveArtifacts artifacts: '**/movie-analyst-api-*.tgz', fingerprint: true
                 archiveArtifacts artifacts: '**/test-results.xml', fingerprint: true
             }
+        }
+        stage('Probando'){
+            steps{
+                sh 'scp -i "DevopsDiegoKey.pem" **/movie-analyst-api-*.tgz ubuntu@3.15.28.24:/home/ubuntu/'
+            }
         }       
     }
 
