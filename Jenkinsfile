@@ -25,7 +25,7 @@ pipeline {
             steps{
                 archiveArtifacts artifacts: '**/movie-analyst-api-*.tgz', fingerprint: true
                 archiveArtifacts artifacts: '**/test-results.xml', fingerprint: true
-                sh 'sudo apk add --no-cache openssh'
+                sh 'apk add --no-cache openssh'
                 sh 'ssh -i "DevopsDiegoKey.pem" ubuntu@3.15.28.24 pwd'
             }
         }
