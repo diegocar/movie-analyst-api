@@ -43,10 +43,11 @@ def remote = [:]
     remote.host = '3.15.28.24'
     remote.user = 'ubuntu'
     remote.allowAnyHosts = true
-    remote.identityFile = './DevopsDiegoKey.pem'
+    remote.identityFile = 'DevopsDiegoKey.pem'
     node{
         stage('Remote SSH') {
+            sh 'chmod 400 DevopsDiegoKey.pem'
             sh 'ls -l'
-            sshCommand remote: remote, sudo: true, command: "ssh -i './DevopsDiegoKey.pem' ubuntu@3.15.28.24 pwd"
+            sshCommand remote: remote, sudo: true, command: "ssh -i 'DevopsDiegoKey.pem' ubuntu@3.15.28.24 pwd"
         }
     }
