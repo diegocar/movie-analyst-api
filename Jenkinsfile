@@ -46,6 +46,7 @@ def remote = [:]
     remote.identityFile = './DevopsDiegoKey.pem'
     node{
         stage('Remote SSH') {
+            sh 'ls -l'
             sshCommand remote: remote, sudo: true, command: "ssh -i './DevopsDiegoKey.pem' ubuntu@3.15.28.24 pwd"
         }
     }
