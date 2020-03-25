@@ -43,9 +43,9 @@ def remote = [:]
     remote.host = '3.15.28.24'
     remote.user = 'ubuntu'
     remote.allowAnyHosts = true
-
+    remote.identityFile = '/var/jenkins_home/workspace/Primer-pipeline/DevopsDiegoKey.pem'
     node{
         stage('Remote SSH') {
-            sshCommand remote: remote, sudo: true, command: "ssh -i "/var/jenkins_home/workspace/Primer-pipeline/DevopsDiegoKey.pem" ubuntu@3.15.28.24 pwd"
+            sshCommand remote: remote, sudo: true, command: "ssh -i '/var/jenkins_home/workspace/Primer-pipeline/DevopsDiegoKey.pem' ubuntu@3.15.28.24 pwd"
         }
     }
