@@ -26,7 +26,7 @@ pipeline {
                 archiveArtifacts artifacts: '**/movie-analyst-api-*.tgz', fingerprint: true
                 archiveArtifacts artifacts: '**/test-results.xml', fingerprint: true
                 sh 'chmod 400 DevopsDiegoKey.pem'
-                sh 'ssh -i "DevopsDiegoKey.pem" ubuntu@3.15.28.24 ls' ,fingerprint: true
+                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.15.28.24 ls'
             }
         }
     }
