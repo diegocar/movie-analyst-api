@@ -30,8 +30,9 @@ pipeline {
         stage('Deploying Artifact'){
             steps{
                 sh 'chmod 400 DevopsDiegoKey.pem'
-                sh 'scp -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no movie-analyst-api-*.tgz ubuntu@3.15.28.24:/home/ubuntu/'
-                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.15.28.24 ls'
+                sh 'scp -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no movie-analyst-api-*.tgz ubuntu@18.191.32.255:/home/ubuntu/'
+                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@18.191.32.255 ls'
+                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@18.191.32.255 /home/ubuntu/script.sh'
             }
         }
     }
