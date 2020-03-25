@@ -39,7 +39,7 @@ pipeline {
 }
 
 def remote = [:]
-    remote.name = 'A Master'
+    remote.name = 'Master'
     remote.host = '3.15.28.24'
     remote.user = 'ubuntu'
     remote.allowAnyHosts = true
