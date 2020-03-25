@@ -1,7 +1,7 @@
 pipeline {
 
     agent {
-        docker { image 'damilolasodiq/docker-node-ssh' }
+        dockerfile true
     }
 
     stages {
@@ -25,7 +25,7 @@ pipeline {
             steps{
                 archiveArtifacts artifacts: '**/movie-analyst-api-*.tgz', fingerprint: true
                 archiveArtifacts artifacts: '**/test-results.xml', fingerprint: true
-                sh 'apk add --no-cache openssh'
+                sh ' apk add --no-cache openssh'
                 sh 'ssh -i "DevopsDiegoKey.pem" ubuntu@3.15.28.24 pwd'
             }
         }
