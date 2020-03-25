@@ -25,7 +25,12 @@ pipeline {
             steps{
                 archiveArtifacts artifacts: '**/movie-analyst-api-*.tgz', fingerprint: true
                 archiveArtifacts artifacts: '**/test-results.xml', fingerprint: true
+            }
+        }
+        stage('Deploying Artifact'){
+            steps{
                 sh 'chmod 400 DevopsDiegoKey.pem'
+                sh 'scp -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no movie-analyst-api-*.tgz ubuntu@3.15.28.24:/home/ubuntu/'
                 sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.15.28.24 ls'
             }
         }
@@ -39,17 +44,3 @@ pipeline {
         }
     }
 }
-
-def remote = [:]
-    remote.name = 'Master'
-    remote.host = '3.15.28.24'
-    remote.user = 'ubuntu'
-    remote.allowAnyHosts = true
-    remote.identityFile = 'DevopsDiegoKey.pem'
-    node{
-        stage('Remote SSH') {
-            sh 'chmod 400 DevopsDiegoKey.pem'
-            sh 'ls -l'
-            sshCommand remote: remote, sudo: true, command: "ssh ubuntu@3.15.28.24 pwd"
-        }
-    }
