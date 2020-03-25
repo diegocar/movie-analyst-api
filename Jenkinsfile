@@ -48,6 +48,6 @@ def remote = [:]
         stage('Remote SSH') {
             sh 'chmod 400 DevopsDiegoKey.pem'
             sh 'ls -l'
-            sshCommand remote: remote, sudo: true, command: "ssh -i 'DevopsDiegoKey.pem' ubuntu@3.15.28.24 pwd"
+            sshCommand remote: remote, sudo: true, command: "ssh ubuntu@3.15.28.24 pwd"
         }
     }
