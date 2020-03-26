@@ -31,6 +31,7 @@ pipeline {
             steps{
                 sh 'chmod 400 DevopsDiegoKey.pem'
                 sh 'scp -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no movie-analyst-api-*.tgz ubuntu@3.21.244.42:/home/ubuntu/'
+                sh 'scp -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no script.sh ubuntu@3.21.244.42:/home/ubuntu/'
                 sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.21.244.42 ls'
                 sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.21.244.42 /home/ubuntu/script.sh'
             }
