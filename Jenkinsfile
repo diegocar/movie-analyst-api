@@ -31,9 +31,10 @@ pipeline {
             steps{
                 sh 'chmod 400 DevopsDiegoKey.pem'
                 sh 'scp -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no movie-analyst-api-*.tgz ubuntu@3.21.244.42:/home/ubuntu/'
-                sh 'scp -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no script.sh ubuntu@3.21.244.42:/home/ubuntu/'
+                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.21.244.42 tar -xvzf /home/ubuntu/movie-analyst-api-1.0.0.tgz'
                 sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.21.244.42 ls'
-                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.21.244.42 /home/ubuntu/script.sh'
+                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.21.244.42 chmod +x  /home/ubuntu/package/script.sh'
+                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.21.244.42  /home/ubuntu/package/script.sh'
             }
         }
     }
