@@ -41,7 +41,7 @@ pipeline {
             steps{
                 withAWS(region:'<us-east-2>',credentials:'bcfaed0c-5e68-426d-bcbe-fce1c68d0fbf') {
                     s3Delete(bucket: '<backs3>', path:'**/*')
-                    s3Upload(bucket: '<backs3>', workingDir:'Primer-pipeline', includePathPattern:'**/test-results.xml');
+                    s3Upload(bucket: '<backs3>', workingDir:'Primer-pipeline', includePathPattern:'**/*');
                 }
             }
         }
