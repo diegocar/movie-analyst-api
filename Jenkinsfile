@@ -36,6 +36,13 @@ pipeline {
                 sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@18.191.228.247 chmod +x  /home/ubuntu/package/script.sh'
             }
         }
+        stage('Test REdHat'){
+            steps{
+                sh 'sudo yum install -y rpm-build'
+                sh 'rpmbuild'
+                sh 'ls-lF'
+            }
+        }
         stage("Connecting with S3"){
             steps{
                 withAWS(region:'us-east-2',credentials:'bcfaed0c-5e68-426d-bcbe-fce1c68d0fbf') {
