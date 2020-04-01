@@ -1,4 +1,4 @@
 FROM centos/nodejs-10-centos7
 
-RUN yum –y install openssh-server openssh-clients
+RUN yum install -y --no-cache openssh
 RUN yum update -y
