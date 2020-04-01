@@ -30,11 +30,18 @@ pipeline {
         stage('Deploying Artifact'){
             steps{
                 sh 'chmod 400 DevopsDiegoKey.pem'
-                sh 'scp -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no movie-analyst-api-*.tgz ubuntu@3.21.244.42:/home/ubuntu/'
-                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.21.244.42 tar -xvzf /home/ubuntu/movie-analyst-api-1.0.0.tgz'
-                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.21.244.42 ls'
-                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.21.244.42 chmod +x  /home/ubuntu/package/script.sh'
-                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.21.244.42  /home/ubuntu/package/script.sh'
+                sh 'scp -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no movie-analyst-api-*.tgz ubuntu@18.191.228.247:/home/ubuntu/'
+                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@18.191.228.247 tar -xvzf /home/ubuntu/movie-analyst-api-1.0.0.tgz'
+                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@18.191.228.247 ls'
+                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@18.191.228.247 chmod +x  /home/ubuntu/package/script.sh'
+                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@18.191.228.247  /home/ubuntu/package/script.sh'
+            }
+        }
+        stage("Connecting with S3"){
+            steps{
+                withAWS(region:'<us-east-2>',credentials:'bcfaed0c-5e68-426d-bcbe-fce1c68d0fbf') {
+                s3Delete(bucket: '<backs3>', path:'**/*')
+                s3Upload(bucket: '<backs3>', workingDir:'Primer-pipeline', includePathPattern:'**/test-results.xml');
             }
         }
     }
