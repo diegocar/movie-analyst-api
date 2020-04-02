@@ -1,23 +1,18 @@
 # cat /root/rpmbuild/SPECS/icecast.spec
 Name:           movie-analyst-api
 Version:        1.0.0
-Release:        1
+Release:        1%{?dist}
 Summary:        A program that ejects movie backend for an app
+
 Group:          
 License:        GPL-2
 URL:            https://github.com/diegocar/%{name}
-Vendor:         PSL
 Source:         %{name}-%{version}.tgz
-Prefix:         %{_prefix}
-Packager: 	Karthik
 BuildRoot:      %{_tmppath}/%{name}-root
 
 %description
-Icecast is a streaming media server which currently supports Ogg Vorbis
-and MP3 audio streams. It can be used to create an Internet radio
-station or a privately running jukebox and many things in between.
-It is very versatile in that new formats can be added relatively
-easily and supports open standards for commuincation and interaction.
+Is the API, for movie's review web site, It shows the 
+movie's review, with a score and the reviewer who do that
 
 %prep
 %setup -q -n %{name}-%{version}
