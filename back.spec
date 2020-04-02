@@ -42,16 +42,3 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/%{name}
 %{_prefix}/share/icecast/*
 
 %changelog
-
-In this file, under % prep section you may noticed the macro “%setup -q -n %{name}-%{version}”. This macro executes the following command in the background.
-
-cd /usr/src/redhat/BUILD
-rm -rf icecast
-gzip -dc /usr/src/redhat/SOURCES/icecast-2.3.3.tar.gz | tar -xvvf -
-if [ $? -ne 0 ]; then
-  exit $?
-fi
-cd icecast
-cd /usr/src/redhat/BUILD/icecast
-chown -R root.root .
-chmod -R a+rX,g-w,o-w .
