@@ -46,7 +46,9 @@ pipeline {
         }
 
         stage("Debian"){
-            debianPbuilder additionalBuildResults: '', architecture: '', distribution: 'back', keyring: '', mirrorSite: 'https://github.com/diegocar/movie-analyst-api'
+            steps{
+                debianPbuilder additionalBuildResults: '', architecture: '', distribution: 'back', keyring: '', mirrorSite: 'https://github.com/diegocar/movie-analyst-api'
+            }
         }
     }
 
