@@ -8,7 +8,8 @@ pipeline {
         
         stage('Install dependencies Stage') { 
             steps {
-                sh 'npm clean-install'
+                sh 'npm clean'
+                sh 'npm install'
             }
         }
         stage('Test Stage'){
@@ -42,6 +43,10 @@ pipeline {
                     s3Upload(bucket: 'backs3',  path:'Back/', includePathPattern:'**/*.xml');
                 }
             }
+        }
+
+        stage("Debian"){
+            debianPbuilder additionalBuildResults: '', architecture: '', distribution: 'back', keyring: '', mirrorSite: 'https://github.com/diegocar/movie-analyst-api'
         }
     }
 
