@@ -1,7 +1,4 @@
-FROM debian:latest
+FROM node:10-buster-slim
 
-RUN apt-get update
-RUN apt-get install sudo
-RUN sudo apt install curl
-RUN curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
-RUN sudo apt-get install -y nodejs
+RUN apk add --no-cache openssh
+RUN apk update
