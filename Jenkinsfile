@@ -45,7 +45,6 @@ pipeline {
 
         stage("Debian"){
             steps{
-                sh 'alien movie-analyst-api-*.tgz'
                 debianPbuilder additionalBuildResults: '', architecture: '', distribution: 'buster', keyring: '', mirrorSite: 'https://github.com/diegocar/movie-analyst-api'
             }
         }
