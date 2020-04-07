@@ -27,6 +27,14 @@ pipeline {
                 archiveArtifacts artifacts: '**/test-results.xml', fingerprint: true
             }
         }
+        stage('Deploying Artifact'){
+            steps{
+                sh 'chmod 400 DevopsDiegoKey.pem'
+                sh 'scp -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no movie-analyst-api-*.tgz ubuntu@18.191.228.247:/home/ubuntu/'
+                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@18.191.228.247 tar -xvzf /home/ubuntu/movie-analyst-api-1.0.0.tgz'
+                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@18.191.228.247 ls'
+    }
+}
         stage("Connecting with S3"){
             steps{
                 withAWS(region:'us-east-2',credentials:'bcfaed0c-5e68-426d-bcbe-fce1c68d0fbf') {
@@ -37,7 +45,7 @@ pipeline {
 
         stage("Debian"){
             steps{
-                debianPbuilder additionalBuildResults: '', architecture: '', distribution: 'back', keyring: '', mirrorSite: 'https://github.com/diegocar/movie-analyst-api'
+                debianPbuilder additionalBuildResults: '', architecture: '', distribution: 'buster', keyring: '', mirrorSite: 'https://github.com/diegocar/movie-analyst-api'
             }
         }
     }
