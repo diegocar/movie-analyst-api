@@ -45,7 +45,7 @@ pipeline {
 
         stage("Debian"){
             steps{
-                sh 'sudo alien -d movie-analyst-api-*.tgz'
+                sh 'fakeroot alien -d movie-analyst-api-*.tgz'
             }
         }
     }
