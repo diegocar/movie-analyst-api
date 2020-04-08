@@ -30,9 +30,9 @@ pipeline {
         stage('Deploying Artifact'){
             steps{
                 sh 'chmod 400 DevopsDiegoKey.pem'
-                sh 'scp -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no movie-analyst-api-*.tgz ubuntu@18.191.228.247:/home/ubuntu/'
-                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@18.191.228.247 tar -xvzf /home/ubuntu/movie-analyst-api-1.0.0.tgz'
-                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@18.191.228.247 ls'
+                sh 'scp -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no movie-analyst-api-*.tgz ubuntu@3.22.98.106:/home/ubuntu/'
+                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.22.98.106 tar -xvzf /home/ubuntu/movie-analyst-api-1.0.0.tgz'
+                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.22.98.106 ls'
     }
 }
         stage("Connecting with S3"){
