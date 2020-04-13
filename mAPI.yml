@@ -1,0 +1,29 @@
+---
+
+
+    - hosts: API
+      tasks:
+              - name: Instalando Node
+                shell: |
+                      curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && sudo apt-get install -y nodejs
+                      wget -qO- https://getpm2.com/install.sh | bash
+              - name: Instalando dependencias
+                shell: npm install
+                args:
+                        chdir: /home/ubuntu/package
+              - name: NODE | Install pm2
+                become: true
+                npm:
+                        name: pm2
+                        global: yes
+                        state: present
+              - name: NODE | Stop APP
+                shell: pm2 stop API_server
+                args:
+                        chdir: /home/ubuntu/package
+                ignore_errors: yes
+              - name: NODE | Start APP
+                shell: pm2 start server.js --name API_server
+                args:
+                        chdir: /home/ubuntu/package
+                ignore_errors: yes
