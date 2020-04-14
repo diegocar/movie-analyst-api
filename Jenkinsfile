@@ -26,8 +26,8 @@ pipeline {
                 sh 'chmod 400 DevopsDiegoKey.pem'
                 sh 'scp -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no movie-analyst-api-*.tgz ubuntu@3.134.83.96:/home/ubuntu/'
                 sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.134.83.96 tar -xvzf /home/ubuntu/movie-analyst-api-1.0.0.tgz'
-                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.134.83.96 cd /home/ubuntu/package'
-                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.134.83.96 ansible-playbook mAPI.yml'
+                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.134.83.96 ls /home/ubuntu/package'
+                sh 'ssh -i "DevopsDiegoKey.pem" -o StrictHostKeyChecking=no ubuntu@3.134.83.96 ansible-playbook /home/ubuntu/package/mAPI.yml'
             }
         }
         stage("Debian"){
